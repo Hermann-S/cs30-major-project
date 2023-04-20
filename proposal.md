@@ -1,12 +1,16 @@
 # Major Project Proposal
 
+- MLB the show
+
 ## Project Description
 
-descripe project here
+- baseball go brrr
 
 ## Needs to Have List
 
-- thing 1
-- thing 2
+- different hitting power
+- strike zone
+- multiple pitches
+- buttons to throw to each base
 
 ## Nice to Have List
