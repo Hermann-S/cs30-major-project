@@ -12,5 +12,7 @@ function setup() {
 
 function draw() {
   background(220);
-  rect(mouseX, mouseY, 50, 50);
+  rectMode(CENTER);
+  rect(mouseX, mouseY, 50, 20);
+  fill(255, 255, 255, 50);
 }
