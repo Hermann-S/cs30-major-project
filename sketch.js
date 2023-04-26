@@ -5,6 +5,7 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
+let ballSize;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -24,5 +25,9 @@ function stirkeZone() {
 }
 
 function pitcher() {
-  circle(width/2, height/2, 30);
+  ballSize = 15;
+  for (let i = 15;i < 30; i++) {
+    ballSize += 0.5;
+  }
+  circle(width/2, height*0.65, ballSize);
 }
