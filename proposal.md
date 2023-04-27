@@ -12,15 +12,15 @@
 - strike zone
 - multiple pitches - using arrays should be able to randomly choose the pitch
 - score board
-- baseball diamond
+- harder hittering power is harder to hit the ball with
+- ball, strike, and out counter
 - sound
 - music
 
 ## Nice to Have List
 
-- harder hittering power is harder to hit the ball with
+- baseball diamond
 - choose game length
-- ball, strike, and out counter
 - deep fake commentators - or grab random people for it
 - distances for single, double, homerun, and foul balls - may use random to help make the game more realistic
 - bunts
