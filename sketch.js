@@ -8,8 +8,8 @@
 let state = "moving";
 let ballSize = 5;
 let ballZoomTimer;
-let x;
-let y;
+let x = 517;
+let y = 488.8;
 let dx;
 let dy;
 let isBallShowing = true;
@@ -40,37 +40,40 @@ function stirkeZone() {
 
 function pitcher() {
   x = width/2;
-  y = height*0.65;
   // eslint-disable-next-line no-undef
   if (ballZoomTimer.expired()) {
     circle(x, y, ballSize);
     ballStopTimer.start();
-    if (ballSize >= 30) {
+    if (ballSize >= 30 && state === "moving") {
       // this circle is going to remove me...
       ballZoomTimer.pause();
       ballZoomTimer.reset();
     }
     else {
-      ballSize += 0.3;
+      if (state === "moving") {
+        ballSize += 0.3;
+      }
     }
+  }
+  else if (state === "hit") {
+    ballSize -= 1;
+    ballZoomTimer.pause();
   }
 }
 
 
 // everything hurts
-// bat is not having an effect on the ball
+// bat now works HOORAY!!! well it kinda works anyway
 function batting() {
   let d = dist(x, y, mouseX, mouseY,d < 30);
-  if (ballSize >= 20) {
+  if (d && ballSize >= 20) {
     state = "hit";
-  }
-  if (state === "hit") {
-    if (d <= 30) {
-      y += 5;
+    if (state === "hit") {
+      y -= 5;
+      
     }
   }
-  // if (d < 15) {
-  //   y += 5;
+  //   if (d <= 30) {
   // }
   else {
     state = "moving";
