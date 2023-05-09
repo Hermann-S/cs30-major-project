@@ -9,7 +9,7 @@ let state = "moving";
 let ballSize = 5;
 let ballZoomTimer;
 let x = 517;
-let y = 488.8;
+let y = 470;
 let isBallShowing = true;
 let ballStopTimer;
 
@@ -22,8 +22,8 @@ class Bat {
     // this.r = r;
     // this.g = g;
     // this.b = b;
-    this.w = 200;
-    this.h = 300;
+    this.w = 70;
+    this.h = 30;
   }
 
   display() {
@@ -63,9 +63,9 @@ function setup() {
 function draw() {
   // this does not work yet
   let batter = new Bat(this.dx, this.dy);
-  background(138, 8, 8);
+  background("pink");
   rectMode(CENTER);
-  rect(mouseX, mouseY, this.w, this.h);
+  // rect(mouseX, mouseY, 70, 30);
   fill(255, 255, 255, 50);
   stirkeZone();
   pitcher();
