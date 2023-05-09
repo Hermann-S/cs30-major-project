@@ -10,10 +10,46 @@ let ballSize = 5;
 let ballZoomTimer;
 let x = 517;
 let y = 488.8;
-let dx;
-let dy;
 let isBallShowing = true;
 let ballStopTimer;
+
+
+// this class is not working how I want it too I will figure it out
+class Bat {
+  constructor(dx, dy) {
+    this.dx = dx;
+    this.dy = dy;
+    // this.r = r;
+    // this.g = g;
+    // this.b = b;
+    this.w = 200;
+    this.h = 300;
+  }
+
+  display() {
+    rect(mouseX, mouseY, this.w, this.h);
+  }
+
+  update() {
+    
+  }
+  keyPressed() {
+    if (keyCode === 49) {
+      this.w = 70;
+      this.h = 30;
+    }
+    else if (keyCode ===  50) {
+      this.w = 60;
+      this.h = 25;
+      this.dy -= 7;
+    }
+    else if (keyCode === 51) {
+      this.w = 50;
+      this.h = 20;
+      this.dy -= 9;
+    }
+  }
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -25,9 +61,11 @@ function setup() {
 }
 
 function draw() {
+  // this does not work yet
+  let batter = new Bat(this.dx, this.dy);
   background(138, 8, 8);
   rectMode(CENTER);
-  rect(mouseX, mouseY, 70, 30);
+  rect(mouseX, mouseY, this.w, this.h);
   fill(255, 255, 255, 50);
   stirkeZone();
   pitcher();
@@ -65,13 +103,15 @@ function pitcher() {
 // everything hurts
 // bat now works HOORAY!!! well it kinda works anyway
 function batting() {
-  let d = dist(x, y, mouseX, mouseY,d < 30);
-  if (d && ballSize >= 20) {
+  if (dist(x, y, mouseX, mouseY) < 30) {
     state = "hit";
     if (state === "hit") {
-      y -= 5;
+      y = this.dy;
       
     }
+  }
+  else if (state === "hit") {
+    y = this.dy;
   }
   //   if (d <= 30) {
   // }
