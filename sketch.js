@@ -62,7 +62,6 @@ function setup() {
 
 function draw() {
   // this does not work yet
-  let batter = new Bat(this.dx, this.dy);
   background("pink");
   rectMode(CENTER);
   // rect(mouseX, mouseY, 70, 30);
@@ -87,15 +86,17 @@ function pitcher() {
       ballZoomTimer.pause();
       ballZoomTimer.reset();
     }
+    else if (state === "hit") {
+      ballSize -= 1;
+      ballZoomTimer.pause();
+      ballZoomTimer.reset();
+      y += this.dy;
+    }
     else {
       if (state === "moving") {
         ballSize += 0.3;
       }
     }
-  }
-  else if (state === "hit") {
-    ballSize -= 1;
-    ballZoomTimer.pause();
   }
 }
 
@@ -103,6 +104,9 @@ function pitcher() {
 // everything hurts
 // bat now works HOORAY!!! well it kinda works anyway
 function batting() {
+  let batter = new Bat(0, -5);
+  batter.display();
+  batter.keyPressed();
   if (dist(x, y, mouseX, mouseY) < 30) {
     state = "hit";
     if (state === "hit") {
