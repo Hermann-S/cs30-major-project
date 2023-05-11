@@ -108,6 +108,7 @@ function batting() {
   batter.display();
   batter.keyPressed();
   if (dist(x, y, mouseX, mouseY) < 30) {
+  // if (ballSize > 20) {
     state = "hit";
     if (state === "hit") {
       y = this.dy;
