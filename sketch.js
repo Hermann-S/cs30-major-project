@@ -14,7 +14,8 @@ let isBallShowing = true;
 let ballStopTimer;
 
 
-// this class is not working how I want it too I will figure it out
+
+// Makes a Cursor that indicates the hitbox keys change the size and power of the bat
 class Bat {
   constructor(dx, dy) {
     this.dx = dx;
@@ -33,23 +34,24 @@ class Bat {
   update() {
     
   }
-  keyPressed() {
+  handleKey() {
     if (keyCode === 49) {
       this.w = 70;
       this.h = 30;
     }
     else if (keyCode ===  50) {
-      this.w = 60;
-      this.h = 25;
+      this.w = 50;
+      this.h = 20;
       this.dy -= 7;
     }
     else if (keyCode === 51) {
-      this.w = 50;
-      this.h = 20;
+      this.w = 30;
+      this.h = 15;
       this.dy -= 9;
     }
   }
 }
+let batter = new Bat(0, -5);
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -87,7 +89,7 @@ function pitcher() {
       ballZoomTimer.reset();
     }
     else if (state === "hit") {
-      ballSize -= 1;
+      // ballSize -= 1;
       ballZoomTimer.pause();
       ballZoomTimer.reset();
       y += this.dy;
@@ -102,21 +104,20 @@ function pitcher() {
 
 
 // everything hurts
-// bat now works HOORAY!!! well it kinda works anyway
+// the ball now dissapears once it's hit
 function batting() {
-  let batter = new Bat(0, -5);
   batter.display();
-  batter.keyPressed();
-  if (dist(x, y, mouseX, mouseY) < 30) {
-  // if (ballSize > 20) {
+  batter.handleKey();
+  // if (dist(x, y, mouseX, mouseY) < 30) {
+  if (ballSize > 20) {
     state = "hit";
     if (state === "hit") {
-      y = this.dy;
+      y += this.dy;
       
     }
   }
   else if (state === "hit") {
-    y = this.dy;
+    y += this.dy;
   }
   //   if (d <= 30) {
   // }

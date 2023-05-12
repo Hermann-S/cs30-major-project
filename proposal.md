@@ -8,11 +8,11 @@
 
 ## Needs to Have List
 
-- different hitting power - keybinds to determine power
-- strike zone
+- different hitting power - keybinds to determine power - DONE
+- strike zone - DONE I THINK
 - multiple pitches - using arrays should be able to randomly choose the pitch
 - score board
-- harder hittering power is harder to hit the ball with
+- harder hittering power is harder to hit the ball with - DONE
 - ball, strike, and out counter
 - sound
 - music
