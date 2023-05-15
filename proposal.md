@@ -8,12 +8,12 @@
 
 ## Needs to Have List
 
-- different hitting power - keybinds to determine power - DONE
-- strike zone - DONE I THINK
+<!-- - different hitting power - keybinds to determine power - DONE -->
+<!-- - strike zone - DONE-->
 - multiple pitches - using arrays should be able to randomly choose the pitch
 - score board
-- harder hittering power is harder to hit the ball with - DONE
-- ball, strike, and out counter
+<!-- - harder hittering power is harder to hit the ball with - DONE -->
+- ball, strike, and out counter - Started 
 - sound
 - music
 
@@ -30,10 +30,14 @@
 
 # Priority list
 
-- strike zone
-- basic pitch - to use for testing whilst figuring out other things
-- ball, strike, and out counter
-- working bat 
+- counter
+- score board
+- end game button
+- multiple pitches
+- sound
+- music
+- game length
+
 
 if want physics use p5play
 

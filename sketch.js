@@ -13,6 +13,13 @@ let y = 470;
 let isBallShowing = true;
 let ballStopTimer;
 
+// need to fine the zone x and y values, need to get a working base/runs system
+let zoneX1;
+let zoneY1;
+let zoneX2;
+let zoneY2;
+let base = 0;
+let finish = false;
 
 
 // Makes a Cursor that indicates the hitbox keys change the size and power of the bat
@@ -123,5 +130,26 @@ function batting() {
   // }
   else {
     state = "moving";
+  }
+}
+
+function theCount(){
+  let strike = 0;
+  let ball = 0;
+  let out = 0;
+  if (x < zoneX1 || y < zoneY1 || x > zoneX2 || y > zoneY2) {
+    ball ++;
+  }
+  else {
+    strike ++;
+  }
+  if (strike === 3) {
+    out ++;
+  }
+  if (ball === 4) {
+    base ++;
+  }
+  if (out === 3) {
+    finish = true;
   }
 }
