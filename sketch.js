@@ -12,6 +12,7 @@ let x = 517;
 let y = 470;
 let isBallShowing = true;
 let ballStopTimer;
+let pitchClockTimer;
 
 // need to fine the zone x and y values, need to get a working base/runs system
 let zoneX1;
@@ -67,6 +68,8 @@ function setup() {
   ballZoomTimer.start();
   // eslint-disable-next-line no-undef
   ballStopTimer = new Timer(1500);
+  // eslint-disable-next-line no-undef
+  pitchClockTimer = new Timer(2000);
 }
 
 function draw() {
@@ -78,6 +81,7 @@ function draw() {
   stirkeZone();
   pitcher();
   batting();
+  reset();
 }
 
 function stirkeZone() {
@@ -115,8 +119,8 @@ function pitcher() {
 function batting() {
   batter.display();
   batter.handleKey();
-  // if (dist(x, y, mouseX, mouseY) < 30) {
-  if (ballSize > 20) {
+  if (dist(x, y, mouseX, mouseY) < 30) {
+  // if (ballSize > 20) {
     state = "hit";
     if (state === "hit") {
       y += this.dy;
@@ -133,6 +137,8 @@ function batting() {
   }
 }
 
+
+// work in progress
 function theCount(){
   let strike = 0;
   let ball = 0;
@@ -151,5 +157,15 @@ function theCount(){
   }
   if (out === 3) {
     finish = true;
+  }
+}
+
+// work in progress should probably just use timers instead of using a key to restart
+function reset() {
+  if (pitchClockTimer.expired) {
+    ballZoomTimer.start();
+    pitcher();
+    pitchClockTimer.pause;
+    pitchClockTimer.reset;
   }
 }
