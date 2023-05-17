@@ -64,12 +64,13 @@ let batter = new Bat(0, -5);
 function setup() {
   createCanvas(windowWidth, windowHeight);
   // eslint-disable-next-line no-undef
-  ballZoomTimer = new Timer(100);
+  ballZoomTimer = new Timer(1000);
+  state = "gettingReady";
   ballZoomTimer.start();
   // eslint-disable-next-line no-undef
   ballStopTimer = new Timer(1500);
   // eslint-disable-next-line no-undef
-  pitchClockTimer = new Timer(2000);
+  pitchClockTimer = new Timer(6000);
 }
 
 function draw() {
@@ -81,7 +82,7 @@ function draw() {
   stirkeZone();
   pitcher();
   batting();
-  reset();
+  // reset();
 }
 
 function stirkeZone() {
@@ -91,24 +92,33 @@ function stirkeZone() {
 function pitcher() {
   x = width/2;
   // eslint-disable-next-line no-undef
-  if (ballZoomTimer.expired()) {
-    circle(x, y, ballSize);
-    ballStopTimer.start();
-    if (ballSize >= 30 && state === "moving") {
-      // this circle is going to remove me...
-      ballZoomTimer.pause();
-      ballZoomTimer.reset();
-    }
-    else if (state === "hit") {
-      // ballSize -= 1;
-      ballZoomTimer.pause();
-      ballZoomTimer.reset();
-      y += this.dy;
-    }
-    else {
-      if (state === "moving") {
-        ballSize += 0.3;
-      }
+  if (ballZoomTimer.expired() && state === "gettingReady") {
+    state = "moving";
+    console.log("test")
+  }
+
+
+  circle(x, y, ballSize);
+  // ballStopTimer.start();
+  if (ballSize >= 30 && state === "moving") {
+    // this circle is going to remove me...
+    // ballZoomTimer.pause();
+    ballZoomTimer.reset();
+    // console.log(ballZoomTimer.getRemainingTime());
+    ballSize = 5;
+    state = "gettingReady";
+    // pitchClockTimer.start();
+
+  }
+  else if (state === "hit") {
+    // ballSize -= 1;
+    ballZoomTimer.pause();
+    ballZoomTimer.reset();
+    y += this.dy;
+  }
+  else {
+    if (state === "moving") {
+      ballSize += 0.3;
     }
   }
 }
@@ -161,11 +171,10 @@ function theCount(){
 }
 
 // work in progress should probably just use timers instead of using a key to restart
-function reset() {
-  if (pitchClockTimer.expired) {
-    ballZoomTimer.start();
-    pitcher();
-    pitchClockTimer.pause;
-    pitchClockTimer.reset;
-  }
-}
+// function reset() {
+//   if (pitchClockTimer.expired) {
+//     pitchClockTimer.reset;
+//     pitchClockTimer.pause;
+//     ballZoomTimer.start();
+//   }
+// }
