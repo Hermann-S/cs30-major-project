@@ -5,16 +5,16 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-let state = "moving";
-let ballSize = 5;
+let state = "getting ready";
+let ballSize = 0;
 let ballZoomTimer;
 let x = 517;
 let y = 470;
 let isBallShowing = true;
-let ballStopTimer;
-let pitchClockTimer;
+// let ballStopTimer;
+// let pitchClockTimer;
 
-// need to fine the zone x and y values, need to get a working base/runs system
+// need to find the zone x and y values, need to get a working base/runs system
 let zoneX1;
 let zoneY1;
 let zoneX2;
@@ -46,16 +46,17 @@ class Bat {
     if (keyCode === 49) {
       this.w = 70;
       this.h = 30;
+      this.dy = -10;
     }
     else if (keyCode ===  50) {
       this.w = 50;
       this.h = 20;
-      this.dy -= 7;
+      this.dy = -15;
     }
     else if (keyCode === 51) {
       this.w = 30;
       this.h = 15;
-      this.dy -= 9;
+      this.dy = -20;
     }
   }
 }
@@ -64,13 +65,13 @@ let batter = new Bat(0, -5);
 function setup() {
   createCanvas(windowWidth, windowHeight);
   // eslint-disable-next-line no-undef
-  ballZoomTimer = new Timer(1000);
+  ballZoomTimer = new Timer(100);
   state = "gettingReady";
   ballZoomTimer.start();
   // eslint-disable-next-line no-undef
   ballStopTimer = new Timer(1500);
   // eslint-disable-next-line no-undef
-  pitchClockTimer = new Timer(6000);
+  // pitchClockTimer = new Timer(90000);
 }
 
 function draw() {
@@ -94,9 +95,7 @@ function pitcher() {
   // eslint-disable-next-line no-undef
   if (ballZoomTimer.expired() && state === "gettingReady") {
     state = "moving";
-    console.log("test")
   }
-
 
   circle(x, y, ballSize);
   // ballStopTimer.start();
@@ -105,7 +104,7 @@ function pitcher() {
     // ballZoomTimer.pause();
     ballZoomTimer.reset();
     // console.log(ballZoomTimer.getRemainingTime());
-    ballSize = 5;
+    ballSize = 0;
     state = "gettingReady";
     // pitchClockTimer.start();
 
@@ -114,7 +113,7 @@ function pitcher() {
     // ballSize -= 1;
     ballZoomTimer.pause();
     ballZoomTimer.reset();
-    y += this.dy;
+    // y += batter.dy;
   }
   else {
     if (state === "moving") {
@@ -133,18 +132,18 @@ function batting() {
   // if (ballSize > 20) {
     state = "hit";
     if (state === "hit") {
-      y += this.dy;
+      y += batter.dy;
       
     }
   }
   else if (state === "hit") {
-    y += this.dy;
+    y += batter.dy;
   }
   //   if (d <= 30) {
   // }
-  else {
-    state = "moving";
-  }
+  // else {
+  //   state = "moving";
+  // }
 }
 
 
