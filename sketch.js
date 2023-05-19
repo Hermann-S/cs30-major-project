@@ -5,22 +5,16 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-let state = "getting ready";
+let state = "gettingReady";
 let ballSize = 0;
 let ballZoomTimer;
 let x = 517;
 let y = 470;
 let isBallShowing = true;
-// let ballStopTimer;
-// let pitchClockTimer;
-
-// need to find the zone x and y values, need to get a working base/runs system
-let zoneX1;
-let zoneY1;
-let zoneX2;
-let zoneY2;
 let base = 0;
 let finish = false;
+
+// need to find the zone x and y values, need to get a working base/runs system
 
 
 // Makes a Cursor that indicates the hitbox keys change the size and power of the bat
@@ -28,9 +22,6 @@ class Bat {
   constructor(dx, dy) {
     this.dx = dx;
     this.dy = dy;
-    // this.r = r;
-    // this.g = g;
-    // this.b = b;
     this.w = 70;
     this.h = 30;
   }
@@ -38,7 +29,7 @@ class Bat {
   display() {
     rect(mouseX, mouseY, this.w, this.h);
   }
-
+  
   update() {
     
   }
@@ -70,20 +61,17 @@ function setup() {
   ballZoomTimer.start();
   // eslint-disable-next-line no-undef
   ballStopTimer = new Timer(1500);
-  // eslint-disable-next-line no-undef
-  // pitchClockTimer = new Timer(90000);
 }
+
 
 function draw() {
   // this does not work yet
   background("pink");
   rectMode(CENTER);
-  // rect(mouseX, mouseY, 70, 30);
   fill(255, 255, 255, 50);
   stirkeZone();
   pitcher();
   batting();
-  // reset();
 }
 
 function stirkeZone() {
@@ -96,24 +84,20 @@ function pitcher() {
   if (ballZoomTimer.expired() && state === "gettingReady") {
     state = "moving";
   }
-
+  
   circle(x, y, ballSize);
   // ballStopTimer.start();
   if (ballSize >= 30 && state === "moving") {
-    // this circle is going to remove me...
-    // ballZoomTimer.pause();
     ballZoomTimer.reset();
-    // console.log(ballZoomTimer.getRemainingTime());
     ballSize = 0;
     state = "gettingReady";
-    // pitchClockTimer.start();
-
+    
   }
   else if (state === "hit") {
     // ballSize -= 1;
     ballZoomTimer.pause();
     ballZoomTimer.reset();
-    // y += batter.dy;
+    // state = "gettingReady";
   }
   else {
     if (state === "moving") {
@@ -124,7 +108,7 @@ function pitcher() {
 
 
 // everything hurts
-// the ball now dissapears once it's hit
+// ball doesnt get pitched after a hit
 function batting() {
   batter.display();
   batter.handleKey();
@@ -133,22 +117,26 @@ function batting() {
     state = "hit";
     if (state === "hit") {
       y += batter.dy;
-      
+      if (y < 0) {
+        y = 470;
+        if (y === 470) {
+          state = "gettingReady";
+        }
+      }
     }
   }
   else if (state === "hit") {
     y += batter.dy;
   }
-  //   if (d <= 30) {
-  // }
-  // else {
-  //   state = "moving";
-  // }
 }
 
 
 // work in progress
 function theCount(){
+  let zoneX1 = width/2 - 100;
+  let zoneY1 = height*0.65 - 150;
+  let zoneX2 = width/2 + 100;
+  let zoneY2 = height*0.65 + 150;
   let strike = 0;
   let ball = 0;
   let out = 0;
@@ -168,12 +156,3 @@ function theCount(){
     finish = true;
   }
 }
-
-// work in progress should probably just use timers instead of using a key to restart
-// function reset() {
-//   if (pitchClockTimer.expired) {
-//     pitchClockTimer.reset;
-//     pitchClockTimer.pause;
-//     ballZoomTimer.start();
-//   }
-// }
