@@ -109,24 +109,31 @@ function pitcher() {
 
 // everything hurts
 // ball doesnt get pitched after a hit
+// ball freezes when near the bat
 function batting() {
   batter.display();
   batter.handleKey();
   if (dist(x, y, mouseX, mouseY) < 30) {
   // if (ballSize > 20) {
     state = "hit";
-    if (state === "hit") {
-      y += batter.dy;
-      if (y < 0) {
-        y = 470;
-        if (y === 470) {
-          state = "gettingReady";
-        }
-      }
-    }
+    // if (state === "hit") {
+    //   y += batter.dy;
+    //   if (y < 0) {
+    //     console.log("test");
+    //     state = "gettingReady";
+    //     if (state === "gettingReady") {
+    //       y = 470;
+    //     }
+    //   }
+    // }
   }
   else if (state === "hit") {
     y += batter.dy;
+    if (y < 0) {
+      y = 470;
+      state = "gettingReady";
+      ballZoomTimer.start;
+    }
   }
 }
 
