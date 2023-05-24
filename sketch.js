@@ -82,6 +82,8 @@ function pitcher() {
   x = width/2;
   // eslint-disable-next-line no-undef
   if (ballZoomTimer.expired() && state === "gettingReady") {
+    console.log("test");
+    ballSize = 0;
     state = "moving";
   }
   
@@ -133,6 +135,7 @@ function batting() {
       y = 470;
       state = "gettingReady";
       ballZoomTimer.start;
+      pitcher();
     }
   }
 }
