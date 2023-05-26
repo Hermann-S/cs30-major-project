@@ -14,7 +14,7 @@ let isBallShowing = true;
 let base = 0;
 let finish = false;
 
-// need to find the zone x and y values, need to get a working base/runs system
+// need to get a working base/runs system
 
 
 // Makes a Cursor that indicates the hitbox keys change the size and power of the bat
@@ -82,7 +82,6 @@ function pitcher() {
   x = width/2;
   // eslint-disable-next-line no-undef
   if (ballZoomTimer.expired() && state === "gettingReady") {
-    console.log("test");
     ballSize = 0;
     state = "moving";
   }
@@ -110,7 +109,6 @@ function pitcher() {
 
 
 // everything hurts
-// ball doesnt get pitched after a hit
 // ball freezes when near the bat
 function batting() {
   batter.display();
@@ -118,23 +116,13 @@ function batting() {
   if (dist(x, y, mouseX, mouseY) < 30) {
   // if (ballSize > 20) {
     state = "hit";
-    // if (state === "hit") {
-    //   y += batter.dy;
-    //   if (y < 0) {
-    //     console.log("test");
-    //     state = "gettingReady";
-    //     if (state === "gettingReady") {
-    //       y = 470;
-    //     }
-    //   }
-    // }
   }
   else if (state === "hit") {
     y += batter.dy;
     if (y < 0) {
       y = 470;
       state = "gettingReady";
-      ballZoomTimer.start;
+      ballZoomTimer.start();
       pitcher();
     }
   }
