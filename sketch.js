@@ -109,11 +109,11 @@ function pitcher() {
 
 
 // everything hurts
-// ball freezes when near the bat
+// ball freezes when near the bat made some improvements but still broken
 function batting() {
   batter.display();
   batter.handleKey();
-  if (dist(x, y, mouseX, mouseY) < 30) {
+  if (dist(x, y, mouseX, mouseY) < 30 && ballSize > 20) {
   // if (ballSize > 20) {
     state = "hit";
   }
