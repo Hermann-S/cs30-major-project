@@ -113,7 +113,7 @@ function pitcher() {
 function batting() {
   batter.display();
   batter.handleKey();
-  if (dist(x, y, mouseX, mouseY) < 30 && ballSize > 20) {
+  if (dist(x, y, mouseX, mouseY) < 30 && ballSize > 20 && mouseIsPressed) {
   // if (ballSize > 20) {
     state = "hit";
   }
