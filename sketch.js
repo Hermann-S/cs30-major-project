@@ -13,6 +13,9 @@ let y = 470;
 let isBallShowing = true;
 let base = 0;
 let finish = false;
+let strike = 0;
+let ball = 0;
+let out = 0;
 
 // need to get a working base/runs system
 
@@ -72,6 +75,7 @@ function draw() {
   stirkeZone();
   pitcher();
   batting();
+  theCount();
 }
 
 function stirkeZone() {
@@ -130,21 +134,22 @@ function batting() {
 
 
 // work in progress
+// display count in the BOTTOM LEFT <- Mr Schellenbergs idea blame him if it looks bad
 function theCount(){
   let zoneX1 = width/2 - 100;
   let zoneY1 = height*0.65 - 150;
   let zoneX2 = width/2 + 100;
   let zoneY2 = height*0.65 + 150;
-  let strike = 0;
-  let ball = 0;
-  let out = 0;
-  if (x < zoneX1 || y < zoneY1 || x > zoneX2 || y > zoneY2) {
+  if ((x < zoneX1 || y < zoneY1 || x > zoneX2 || y > zoneY2) && ballSize >= 30) {
     ball ++;
   }
   else {
-    strike ++;
+    if (ballSize > 30) {
+      strike ++;
+    }
   }
   if (strike === 3) {
+    strike = 0;
     out ++;
   }
   if (ball === 4) {
