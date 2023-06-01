@@ -69,7 +69,7 @@ function setup() {
 
 function draw() {
   // this does not work yet
-  background("pink");
+  background("brown");
   rectMode(CENTER);
   fill(255, 255, 255, 50);
   stirkeZone();
@@ -135,11 +135,13 @@ function batting() {
 
 // work in progress
 // display count in the BOTTOM LEFT <- Mr Schellenbergs idea blame him if it looks bad
+// not able to function properly today will try again tomorrow
 function theCount(){
   let zoneX1 = width/2 - 100;
   let zoneY1 = height*0.65 - 150;
   let zoneX2 = width/2 + 100;
   let zoneY2 = height*0.65 + 150;
+
   if ((x < zoneX1 || y < zoneY1 || x > zoneX2 || y > zoneY2) && ballSize >= 30) {
     ball ++;
   }
@@ -158,4 +160,8 @@ function theCount(){
   if (out === 3) {
     finish = true;
   }
+
+  textSize(32);
+  text("strike", width*0.75, height/2);
+  fill(255, 255, 255, 255);
 }
