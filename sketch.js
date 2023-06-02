@@ -76,6 +76,9 @@ function draw() {
   pitcher();
   batting();
   theCount();
+
+  push();
+  pop();
 }
 
 function stirkeZone() {
@@ -118,7 +121,7 @@ function batting() {
   batter.display();
   batter.handleKey();
   if (dist(x, y, mouseX, mouseY) < 30 && ballSize > 20 && mouseIsPressed) {
-  // if (ballSize > 20) {
+    // if (ballSize > 20) {
     state = "hit";
   }
   else if (state === "hit") {
@@ -141,7 +144,7 @@ function theCount(){
   let zoneY1 = height*0.65 - 150;
   let zoneX2 = width/2 + 100;
   let zoneY2 = height*0.65 + 150;
-
+  
   if ((x < zoneX1 || y < zoneY1 || x > zoneX2 || y > zoneY2) && ballSize >= 30) {
     ball ++;
   }
@@ -160,8 +163,10 @@ function theCount(){
   if (out === 3) {
     finish = true;
   }
-
+  
   textSize(32);
-  text("strike", width*0.75, height/2);
   fill(255, 255, 255, 255);
+  text("ball", width*0.025, height*0.91);
+  text("strike", width*0.025, height*0.95);
+  text("out", width*0.025, height*0.99);
 }
