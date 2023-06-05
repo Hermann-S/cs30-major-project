@@ -13,7 +13,7 @@
 - multiple pitches - using arrays should be able to randomly choose the pitch
 - score board
 <!-- - harder hittering power is harder to hit the ball with - DONE -->
-- ball, strike, and out counter - Started 
+<!-- - ball, strike, and out counter - done might do some touch ups to make it look better -->
 - sound
 - music
 

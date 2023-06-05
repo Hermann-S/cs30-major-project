@@ -120,9 +120,14 @@ function pitcher() {
 function batting() {
   batter.display();
   batter.handleKey();
-  if (dist(x, y, mouseX, mouseY) < 30 && ballSize > 20 && mouseIsPressed) {
+  if (dist(x, y, mouseX, mouseY) < 30 && ballSize > 25 && mouseIsPressed) {
     // if (ballSize > 20) {
     state = "hit";
+  }
+
+  // very broken LMAO
+  else if (dist(x, y, mouseX, mouseY) > 30 && mouseIsPressed) {
+    strike++;
   }
   else if (state === "hit") {
     y += batter.dy;
@@ -168,5 +173,7 @@ function theCount(){
   fill(255, 255, 255, 255);
   text("ball", width*0.025, height*0.91);
   text("strike", width*0.025, height*0.95);
+  text(strike, width *0.1, height*0.95);
   text("out", width*0.025, height*0.99);
+  text(out, width*0.1, height*0.99);
 }
