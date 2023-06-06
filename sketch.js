@@ -59,7 +59,7 @@ let batter = new Bat(0, -5);
 function setup() {
   createCanvas(windowWidth, windowHeight);
   // eslint-disable-next-line no-undef
-  ballZoomTimer = new Timer(100);
+  ballZoomTimer = new Timer(1000);
   state = "gettingReady";
   ballZoomTimer.start();
   // eslint-disable-next-line no-undef
@@ -126,7 +126,7 @@ function batting() {
   }
 
   // very broken LMAO
-  else if (dist(x, y, mouseX, mouseY) > 30 && mouseIsPressed) {
+  else if (dist(x, y, mouseX, mouseY) > 30 && mouseIsPressed && state === "moving") {
     strike++;
   }
   else if (state === "hit") {
