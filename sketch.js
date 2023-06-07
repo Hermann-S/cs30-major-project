@@ -16,6 +16,7 @@ let finish = false;
 let strike = 0;
 let ball = 0;
 let out = 0;
+let mySound;
 
 // need to get a working base/runs system
 
@@ -55,6 +56,14 @@ class Bat {
   }
 }
 let batter = new Bat(0, -5);
+
+
+
+function preload() {
+  soundFormats('mp3', 'ogg');
+  mySound = loadSound();
+}
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -126,9 +135,9 @@ function batting() {
   }
 
   // very broken LMAO
-  else if (dist(x, y, mouseX, mouseY) > 30 && mouseIsPressed && state === "moving") {
-    strike++;
-  }
+  // else if (dist(x, y, mouseX, mouseY) > 30 && mouseIsPressed && state === "moving") {
+  //   strike++;
+  // }
   else if (state === "hit") {
     y += batter.dy;
     if (y < 0) {
