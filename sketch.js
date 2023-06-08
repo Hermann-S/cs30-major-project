@@ -17,6 +17,7 @@ let strike = 0;
 let ball = 0;
 let out = 0;
 let mySound;
+let run = 0;
 
 // need to get a working base/runs system
 
@@ -59,10 +60,10 @@ let batter = new Bat(0, -5);
 
 
 
-function preload() {
-  soundFormats('mp3', 'ogg');
-  mySound = loadSound();
-}
+// function preload() {
+//   soundFormats('mp3', 'ogg');
+//   mySound = loadSound();
+// }
 
 
 function setup() {
@@ -85,9 +86,7 @@ function draw() {
   pitcher();
   batting();
   theCount();
-
-  push();
-  pop();
+  scoreBoard();
 }
 
 function stirkeZone() {
@@ -186,3 +185,18 @@ function theCount(){
   text("out", width*0.025, height*0.99);
   text(out, width*0.1, height*0.99);
 }
+
+function scoreBoard() {
+  if (y <= 50) {
+    run++;
+  }
+  textSize(32);
+  fill(255, 255, 255, 255);
+  text("runs", width*0.025, height/4);
+}
+
+// if the state === power && dist <10 then it should homerun
+// if the state is not power but intermediate && dist <5 then it should homerun
+// if the state is contact && dist <10 it should be a double
+// using this i can set different distances and make it more fun
+// this could also fix the scoreboard j
