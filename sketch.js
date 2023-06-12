@@ -60,10 +60,10 @@ let batter = new Bat(0, -5);
 
 
 
-// function preload() {
-//   soundFormats('mp3', 'ogg');
-//   mySound = loadSound();
-// }
+function preload() {
+  soundFormats("mp3", "ogg");
+  mySound = loadSound("bat.mp3");
+}
 
 
 function setup() {
@@ -131,6 +131,7 @@ function batting() {
   if (dist(x, y, mouseX, mouseY) < 30 && ballSize > 25 && mouseIsPressed) {
     // if (ballSize > 20) {
     state = "hit";
+    mySound.play();
   }
 
   // very broken LMAO
@@ -195,8 +196,8 @@ function scoreBoard() {
   text("runs", width*0.025, height/4);
 }
 
-// if the state === power && dist <10 then it should homerun
+// if the state === power && dist <10 then it should homerun if it's within 20 double, if its within 30 out, 25 = single
 // if the state is not power but intermediate && dist <5 then it should homerun
 // if the state is contact && dist <10 it should be a double
 // using this i can set different distances and make it more fun
-// this could also fix the scoreboard j
+// this could also fix the scoreboard
