@@ -5,7 +5,8 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-let state = "gettingReady";
+let ballState = "gettingReady";
+let batState = "light";
 let ballSize = 0;
 let ballZoomTimer;
 let x = 517;
@@ -18,6 +19,7 @@ let ball = 0;
 let out = 0;
 let mySound;
 let run = 0;
+let fifty = ["double", "single"];
 
 // need to get a working base/runs system
 
@@ -43,16 +45,19 @@ class Bat {
       this.w = 70;
       this.h = 30;
       this.dy = -10;
+      batState = "light";
     }
     else if (keyCode ===  50) {
       this.w = 50;
       this.h = 20;
       this.dy = -15;
+      batState = "intermediate";
     }
     else if (keyCode === 51) {
       this.w = 30;
       this.h = 15;
       this.dy = -20;
+      batState = "power";
     }
   }
 }
@@ -60,17 +65,17 @@ let batter = new Bat(0, -5);
 
 
 
-function preload() {
-  soundFormats("mp3", "ogg");
-  mySound = loadSound("bat.mp3");
-}
+// function preload() {
+//   soundFormats("mp3", "ogg");
+//   mySound = loadSound("bat.mp3");
+// }
 
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   // eslint-disable-next-line no-undef
   ballZoomTimer = new Timer(1000);
-  state = "gettingReady";
+  ballState = "gettingReady";
   ballZoomTimer.start();
   // eslint-disable-next-line no-undef
   ballStopTimer = new Timer(1500);
@@ -96,27 +101,27 @@ function stirkeZone() {
 function pitcher() {
   x = width/2;
   // eslint-disable-next-line no-undef
-  if (ballZoomTimer.expired() && state === "gettingReady") {
+  if (ballZoomTimer.expired() && ballState === "gettingReady") {
     ballSize = 0;
-    state = "moving";
+    ballState = "moving";
   }
   
   circle(x, y, ballSize);
   // ballStopTimer.start();
-  if (ballSize >= 30 && state === "moving") {
+  if (ballSize >= 30 && ballState === "moving") {
     ballZoomTimer.reset();
     ballSize = 0;
-    state = "gettingReady";
+    ballState = "gettingReady";
     
   }
-  else if (state === "hit") {
+  else if (ballState === "hit") {
     // ballSize -= 1;
     ballZoomTimer.pause();
     ballZoomTimer.reset();
     // state = "gettingReady";
   }
   else {
-    if (state === "moving") {
+    if (ballState === "moving") {
       ballSize += 0.3;
     }
   }
@@ -128,21 +133,48 @@ function pitcher() {
 function batting() {
   batter.display();
   batter.handleKey();
-  if (dist(x, y, mouseX, mouseY) < 30 && ballSize > 25 && mouseIsPressed) {
-    // if (ballSize > 20) {
-    state = "hit";
-    mySound.play();
+  // power
+  if (dist(x, y, mouseX, mouseY) < 10 && ballSize > 25 && mouseIsPressed && batState === "power") {
+    ballState = "home run";
+    run = base + 1;
+    // mySound.play();
+  }
+  // power
+  if (dist(x, y, mouseX, mouseY) < 15 && ballSize > 25 && mouseIsPressed && batState === "power") {
+    ballState = "double";
+
+    // mySound.play();
+  }
+  // intermediate
+  if (dist(x, y, mouseX, mouseY) < 5 && ballSize > 25 && mouseIsPressed && batState === "intermediate") {
+    ballState = "home run";
+    // mySound.play();
+  }
+  // intermediate
+  if (dist(x, y, mouseX, mouseY) < 20 && ballSize > 25 && mouseIsPressed && batState === "intermediate") {
+    ballState = random(fifty);
+    // mySound.play();
+  }
+  // light
+  if (dist(x, y, mouseX, mouseY) < 5 && ballSize > 25 && mouseIsPressed && batState === "light") {
+    ballState = "double";
+    // mySound.play();
+  }
+  // light
+  if (dist(x, y, mouseX, mouseY) < 30 && ballSize > 25 && mouseIsPressed && batState === "light") {
+    ballState = "single";
+    // mySound.play();
   }
 
   // very broken LMAO
   // else if (dist(x, y, mouseX, mouseY) > 30 && mouseIsPressed && state === "moving") {
   //   strike++;
   // }
-  else if (state === "hit") {
+  else if (ballState === "home run" || ballState === "double" || ballState === "single") {
     y += batter.dy;
     if (y < 0) {
       y = 470;
-      state = "gettingReady";
+      ballState = "gettingReady";
       ballZoomTimer.start();
       pitcher();
     }
@@ -158,6 +190,14 @@ function theCount(){
   let zoneY1 = height*0.65 - 150;
   let zoneX2 = width/2 + 100;
   let zoneY2 = height*0.65 + 150;
+  
+  textSize(32);
+  fill(255, 255, 255, 255);
+  text("ball", width*0.025, height*0.91);
+  text("strike", width*0.025, height*0.95);
+  text(strike, width *0.1, height*0.95);
+  text("out", width*0.025, height*0.99);
+  text(out, width*0.1, height*0.99);
   
   if ((x < zoneX1 || y < zoneY1 || x > zoneX2 || y > zoneY2) && ballSize >= 30) {
     ball ++;
@@ -177,14 +217,6 @@ function theCount(){
   if (out === 3) {
     finish = true;
   }
-  
-  textSize(32);
-  fill(255, 255, 255, 255);
-  text("ball", width*0.025, height*0.91);
-  text("strike", width*0.025, height*0.95);
-  text(strike, width *0.1, height*0.95);
-  text("out", width*0.025, height*0.99);
-  text(out, width*0.1, height*0.99);
 }
 
 function scoreBoard() {
@@ -196,8 +228,5 @@ function scoreBoard() {
   text("runs", width*0.025, height/4);
 }
 
-// if the state === power && dist <10 then it should homerun if it's within 20 double, if its within 30 out, 25 = single
-// if the state is not power but intermediate && dist <5 then it should homerun
-// if the state is contact && dist <10 it should be a double
-// using this i can set different distances and make it more fun
-// this could also fix the scoreboard
+// instead of using the base variable I should use an array to tell me where the runners are and update their postion on every hit
+// I think it would be a good idea to make it reset the count, runners and scoreboard if the outs hit 3
